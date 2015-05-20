@@ -51,6 +51,7 @@ function GeolocationControl(controlDiv, map) {
     google.maps.event.addDomListener(controlUI, 'click', geolocate);
 }
 
+// Requests the users geolocation
 function geolocate() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -71,6 +72,7 @@ function geolocate() {
     }
 }
 
+//Handles No geolocation, or the user declined the geolocation
 function handleNoGeolocation(errorFlag) {
     if (errorFlag) {
         var content = 'Error: The Geolocation service failed.';
@@ -86,6 +88,7 @@ function handleNoGeolocation(errorFlag) {
     map.setCenter(options.position);
 }
 
+// Does all the search functionality
 function performSearch() {
     var request = {
         bounds: map.getBounds(),
@@ -158,6 +161,7 @@ function createMarker(place) {
             infoWindow.open(map, marker);
         });
     });
+    service.getDetails(place)
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
